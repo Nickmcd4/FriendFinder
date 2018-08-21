@@ -211,50 +211,52 @@
 
 
     <script type="text/javascript">
-    $("#submit").on("click", function(event){
-        event.preventDefault();
+        $("#submit").on("click", function (event) {
+            event.preventDefault();
 
-        function validateInput(){
-            var isValid = true;
-            $(".form-control").each(function() {
-                if ($(this).val() === ""){
-                    isValid = false;
-                }
-            });
+            function validateInput() {
+                var isValid = true;
+                $(".form-control").each(function () {
+                    if ($(this).val() === "") {
+                        isValid = false;
+                    }
+                });
 
-            $(".chosen-select").each(function(){
-                if($(this).val() === ""){
-                    isValid = false;
-                }
-            });
-            return isValid;
-        }
+                $(".chosen-select").each(function () {
+                    if ($(this).val() === "") {
+                        isValid = false;
+                    }
+                });
+                return isValid;
+            }
 
-        if(validateInput()){
-            var userInput = {
-                name: $("#name").val(),
-                photo: $("#photo").val(),
-                scores: [
-                    $("#q1").val(),
-                    $("#q2").val(),
-                    $("#q3").val(),
-                    $("#q4").val(),
-                    $("#q5").val(),
-                    $("#q6").val(),
-                    $("#q7").val(),
-                    $("#q8").val(),
-                    $("#q9").val(),
-                    $("#q10").val()
-                ]
-            };
-            console.log(userInput);
+            if (validateInput()) {
+                var userInput = {
+                    name: $("#name").val(),
+                    photo: $("#photo").val(),
+                    scores: [
+                        $("#q1").val(),
+                        $("#q2").val(),
+                        $("#q3").val(),
+                        $("#q4").val(),
+                        $("#q5").val(),
+                        $("#q6").val(),
+                        $("#q7").val(),
+                        $("#q8").val(),
+                        $("#q9").val(),
+                        $("#q10").val()
+                    ]
+                };
+                console.log(userInput);
 
-            
-        }
-        else{
-            alert("YOU HAVE INCOMPLETE FIELDS!!!")
-        }
-    })
+                $.post("/api/friends", userInput, function (data) {
+
+                });
+
+            } else {
+                alert("YOU HAVE INCOMPLETE FIELDS!!!")
+            }
+        })
     </script>
 
 </body>
