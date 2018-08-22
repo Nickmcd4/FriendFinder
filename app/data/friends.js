@@ -1,5 +1,7 @@
 var friends = [{
-    name:"john"
+    name:"Fido Johnson",
+    photo: "https://avatars.plurk.com/6945585-big16.jpg",
+    scores:[1,1,1,1,1,1,1,1,1,1]
 }
   ];
   

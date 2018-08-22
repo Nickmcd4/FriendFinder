@@ -8,7 +8,11 @@
         crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
         crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -206,6 +210,28 @@
         </footer>
 
 
+        <div id="my-modal" class="modal" data-backdrop="false" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Your Best Match!</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+
+                      <div><h2  class="personName"></h2></div>
+                      <div><img class="personImg" src=""></div>
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
     </div>
 
 
@@ -249,7 +275,19 @@
                 };
                 console.log(userInput);
 
-                $.post("/api/friends", userInput, function (data) {
+                $.post("/api/friends", userInput).done(function (data) {
+                    console.log('response = ' + JSON.stringify(data));
+                    // Grab the result from the AJAX post so that the best match's name and photo are displayed.
+                    console.log(data.matchImage);
+                    console.log(data.matchName);
+
+                    $("#my-modal").modal('toggle');
+
+                    $(".personName").text(data.matchName);
+                    // $('.modal-backdrop').removeClass("modal-backdrop");  
+                    $(".personImg").attr("src", data.matchImage);
+
+
 
                 });
 
